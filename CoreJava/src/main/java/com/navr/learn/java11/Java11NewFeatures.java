@@ -53,11 +53,24 @@ public class Java11NewFeatures {
     }
 
     private static void newCollectionMethods() {
-        List<String> strList = Arrays.asList("hello", "world");
-        System.out.printf("strList: %s%n", strList);
+        // Returns a fixed-size list backed by the specified array.
+        // Changes to the returned list "write through" to the array.
+        List<String> strAsList = Arrays.asList("hello", "world");
+        // strAsList.add("something"); // throws UnsupportedOperationException
+        strAsList.set(0, "Hola"); // Changes to underlying array is allowed.
+        System.out.printf("strAsList: %s%n", strAsList);
 
-        String[] strArray = strList.toArray(String[]::new);
+        // Returns an array containing all of the elements in this collection,
+        // using the provided generator function to allocate the returned array.
+        String[] strArray = strAsList.toArray(String[]::new);
         System.out.printf("strArray: %s%n", Arrays.toString(strArray));
+
+        // Since Java 9. Returns an unmodifiable list.
+        List<Integer> intOfList = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+        // intOfList.set(0, 100); // throws UnsupportedOperationException
+        // intOfList.add(12); // throws UnsupportedOperationException
+        System.out.printf("intOfList=%s%n", intOfList);
+
     }
 
     private static void newLambdaFeatures() {

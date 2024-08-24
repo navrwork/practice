@@ -24,7 +24,7 @@ public class StringDemo {
         String s3 = new String("hello");
         String s4 = new String("hello").intern();
 
-        System.out.printf("s1=\"%s\", s2=\"%s\", s3=new String(\"%s\"), s4=new String(\"%s\").intern() %n", s1, s2, s3, s4);
+        System.out.printf("String s1=\"%s\"%nString s2=\"%s\"%nString s3=new String(\"%s\")%nString s4=new String(\"%s\").intern() %n%n", s1, s2, s3, s4);
         System.out.printf("s1==s2->%b, s1==s3->%b, s1==s4->%b%n", s1 == s2, s1 == s3, s1 == s4);
         System.out.printf("s2==s3->%b, s2==s4->%b%n", s2 == s3, s2 == s4);
         System.out.printf("s3==s4->%b%n", s3 == s4);
