@@ -63,6 +63,7 @@ public class Java11NewFeatures {
         // Returns an array containing all of the elements in this collection,
         // using the provided generator function to allocate the returned array.
         String[] strArray = strAsList.toArray(String[]::new);
+        //String[] strArray = strAsList.toArray(new String[]{});
         System.out.printf("strArray: %s%n", Arrays.toString(strArray));
 
         // Since Java 9. Returns an unmodifiable list.
@@ -78,6 +79,7 @@ public class Java11NewFeatures {
         String resultString = sampleList.stream()
                 // Local var supports annotations like: (@Nonnull var x)
                 .map((var x) -> x.toUpperCase())
+                //.map(String::toUpperCase)
                 .collect(Collectors.joining(", "));
         System.out.printf("%nsampleList=%s%n", sampleList);
         System.out.printf("resultString=%s%n", resultString);
