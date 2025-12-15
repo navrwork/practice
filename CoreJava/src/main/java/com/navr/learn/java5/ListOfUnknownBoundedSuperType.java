@@ -115,7 +115,7 @@ public class ListOfUnknownBoundedSuperType {
 //        list.add(new Object()); // Not Ok.
 
 //        Integer i = list.get(0); // Illegal: Could be a List<Object>, only Object is guaranteed
-        Integer intObj = (Integer) list.get(0); // Illegal: Could be a List<Object>, only Object is guaranteed
+        Integer intObj = (Integer) list.get(0); // Ok. Explicit cast is ok.
         Object obj = list.get(0); // Legal: All elements are at least Objects
         System.out.printf("addNumbers: intObj=%d, obj=%d%n", intObj, obj);
     }
