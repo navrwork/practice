@@ -80,29 +80,30 @@ public class ListOfUnknownBoundedSuperType {
      * In Java, &lt;? super T&gt; is a lower-bounded wildcard used in generics. It represents an unknown type that is either T or one of its superclasses.
      * <br/><br/>
      * <b>
-     *    When you use List&lt;? super Integer&gt;, the method signature declares: "accept a list whose type is Integer or any supertype of Integer."
+     * When you use List&lt;? super Integer&gt;, the method signature declares: "accept a list whose type is Integer or any supertype of Integer."
      * </b>
      * <br/><br/>
-     *
+     * <p>
      * The compiler determines compatibility by checking if the actual list type fits this constraint.
      * For instance, &lt;? super T&gt; represents an unknown type that is either Integer or one of its superclasses such as Number or Object.
      * <br/><br/>
      * Key Characteristics:
-     *  <ul>
-     *     <li>Definition: It matches Integer and any of its parent types: Integer, Number, Serializable, and Object.</li>
+     * <ul>
+     *    <li>Definition: It matches Integer and any of its parent types: Integer, Number, Serializable, and Object.</li>
      *
-     *     <li>PECS Principle: This follows the "Consumer Super" rule. It is used when you want a collection to consume (receive) data.</li>
+     *    <li>PECS Principle: This follows the "Consumer Super" rule. It is used when you want a collection to consume (receive) data.</li>
      *
-     *     <li>
-     *          Writing (Adding): <br/> You can safely add an Integer (or its subtypes) to a collection defined with this wildcard. This is because regardless of whether the actual list is a List&lt;Number&gt; or List&lt;Object&gt;, an Integer is a valid element for all of them.
-     *          With &lt;? super T&gt;, you can only add elements of type T or its subtypes. You cannot add supertypes of T, even if they seem logically compatible, because the compiler must protect against runtime type errors.
-     *     </li>
+     *    <li>
+     *         Writing (Adding): <br/> You can safely add an Integer (or its subtypes) to a collection defined with this wildcard. This is because regardless of whether the actual list is a List&lt;Number&gt; or List&lt;Object&gt;, an Integer is a valid element for all of them.
+     *         With &lt;? super T&gt;, you can only add elements of type T or its subtypes. You cannot add supertypes of T, even if they seem logically compatible, because the compiler must protect against runtime type errors.
+     *    </li>
      *
-     *     <li>Reading (Getting): When you read from such a collection, you are only guaranteed to get an Object. The compiler cannot be sure if the list contains specifically Integer or Number objects, so it defaults to the highest common ancestor.</li>
-     *  </ul>
-     *  <br/>
+     *    <li>Reading (Getting): When you read from such a collection, you are only guaranteed to get an Object. The compiler cannot be sure if the list contains specifically Integer or Number objects, so it defaults to the highest common ancestor.</li>
+     * </ul>
+     * <br/>
      **/
     private static void addNumbers(List<? super Integer> list) {
+        System.out.printf("addNumbers: list class = %s %n", list.getClass().getName());
         list.add(10); // Legal: Integer can be added to any supertype of Integer
 
         //
@@ -113,8 +114,10 @@ public class ListOfUnknownBoundedSuperType {
         //
 //        list.add(new Object()); // Not Ok.
 
-        // Integer i = list.get(0); // Illegal: Could be a List<Object>, only Object is guaranteed
+//        Integer i = list.get(0); // Illegal: Could be a List<Object>, only Object is guaranteed
+        Integer intObj = (Integer) list.get(0); // Illegal: Could be a List<Object>, only Object is guaranteed
         Object obj = list.get(0); // Legal: All elements are at least Objects
+        System.out.printf("addNumbers: intObj=%d, obj=%d%n", intObj, obj);
     }
 
 }
