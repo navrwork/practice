@@ -35,7 +35,7 @@ public class ListOfUnknownBoundedSubType {
         numberList = new ArrayList<Integer>(); // Ok.
         numberList = new ArrayList<Double>(); // Ok.
 
-        numberList.add(null); // Ok.
+        numberList.add(null); // Ok. Only 'null' can be added (written) to the list. No other write is allowed.
 
 //        numberList = new ArrayList<Object>(); // NOT Ok. Incompatible types. Found: 'java.util.ArrayList<java.lang.Object>', required: 'java.util.List<? extends java.lang.Number>'
 
@@ -46,6 +46,8 @@ public class ListOfUnknownBoundedSubType {
         Number num = numberList.get(0); // Ok. Element read will be treated as type Number.
         System.out.printf("numberList(0): %d%n", num);
 
+        Number numObj = numberList.get(0); // Ok. List contains elements of 'Number' subtype, but we don't know what exactly it is.
+        // Integer intNum = numberList.get(0); // NOT Ok. Incompatible types. Found: 'capture<? extends java.lang.Number>', required: 'java.lang.Integer'
     }
 
 }
