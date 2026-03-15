@@ -58,4 +58,21 @@ public class PatternMatchingForSwitch {
         System.out.printf("getDoubleUsingSwitch: d=%f%n", d);
         return d;
     }
+
+    /**
+     * Pattern Matching for Switch feature allows type patterns and null handling in switches for concise logic.
+     * It eliminates casting and instanceof checks, improving readability over traditional switches.
+     *
+     * @param obj
+     * @return
+     */
+   private static String formatter(Object obj) {
+        return switch (obj) {
+            case Integer i -> "Integer: " + i;
+            case String s -> "String: " + s;
+            case null -> "Null value";
+            default -> "Unknown: " + obj.getClass();
+        };
+    }
+
 }
